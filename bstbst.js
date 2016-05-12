@@ -7,13 +7,13 @@ const getData = readline.createInterface({
 });
 var node = new Node(null,null,null);
 var newInput = new UserInput();
+
 newInput.bstOptions();
 
 function Node(value, left, right){
 	this.value = value;
 	this.left = left;
 	this.right = right;
-
 	this.newData = function(value){
 		if(this.value === null){			
 			node = new Node(value,null,null);
@@ -51,9 +51,6 @@ function Node(value, left, right){
 				newInput.bstOptions();
 			}
 		}
-		else{
-			newInput.bstOptions();
-			}
 	};
 	this.displayNodePath = function(value, directions){
 		if(value === this.value){
@@ -79,7 +76,7 @@ function Node(value, left, right){
 				newInput.bstOptions();
 			}
 		}else{
-			console.log('undefined');
+			console.log('Invalid Entry.');
 			newInput.bstOptions();
 		}
 	};
@@ -87,7 +84,7 @@ function Node(value, left, right){
 
 function UserInput(){
 	this.bstOptions = function(){
-		getData.question('| 1) Add | 2) Search | 3) Display Tree | 4) Quit? | ', function(answer){
+		getData.question(' | 1) Add | 2) Search | 3) Display Tree | 4) Quit? | ', function(answer){
 			answer = Number(answer);
 			if(answer === 1){
 				newInput.addNode();
@@ -103,11 +100,11 @@ function UserInput(){
 				getData.close();
 			}
 			else{
+				console.log('Invalid Entry.');
 				newInput.bstOptions();
 			}
 		});
 	};
-
 	this.addNode = function(){
 		getData.question('Please enter a number for a new node. ', function(answer){
 			answer = Number(answer);
