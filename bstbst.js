@@ -14,12 +14,19 @@ function Node(value, left, right){
 	this.value = value;
 	this.left = left;
 	this.right = right;
+	
+	var rightWord = 'right';
+	var leftWord = 'left';
+
 	this.newData = function(value){
-		if(this.value === null){			
+		if(this.value === null){
 			node = new Node(value,null,null);
+			console.log("You've added",value,"as the root.")
+			newInput.bstOptions();
 		}
-		if(value === this.value){
+		else if(value === this.value){
 			if(newInput){
+				console.log('The value',value,'already exists as a node.');
 				newInput.bstOptions();
 			}
 		}
@@ -59,20 +66,18 @@ function Node(value, left, right){
 		}
 		else if(value < this.value){
 			if(this.left){
-				var leftWord = 'left';
 				directions = directions.concat(' ',this.value,', ',leftWord);
 				this.left.displayNodePath(value, directions);
 			}else{
-				console.log('The node,', value,'does not exist.');
+				console.log('There is not a node with the value of', value+'.');
 				newInput.bstOptions();
 			}
 		}else if(value > this.value){
 			if(this.right){
-				var rightWord = 'right';
 				directions = directions.concat(' ',this.value,', ',rightWord)
 				this.right.displayNodePath(value, directions);
 			}else{
-				console.log('The node,', value,'does not exist.');
+				console.log('There is not a node with the value of', value+'.');
 				newInput.bstOptions();
 			}
 		}else{
@@ -84,7 +89,7 @@ function Node(value, left, right){
 
 function UserInput(){
 	this.bstOptions = function(){
-		getData.question(' | 1) Add | 2) Search | 3) Display Tree | 4) Quit? | ', function(answer){
+		getData.question(' | 1) Add | 2) Search | 3) Display Tree | 4) Quit? | ',function(answer){
 			answer = Number(answer);
 			if(answer === 1){
 				newInput.addNode();
@@ -107,12 +112,12 @@ function UserInput(){
 	};
 	this.addNode = function(){
 		getData.question('Please enter a number for a new node. ', function(answer){
-			answer = Number(answer);
 			if(0 <= answer || 0 > answer){
+				answer = Number(answer);
 				node.newData(answer);
 			}
 			else{
-				console.log('Invalid Entry.');
+				console.log("I'm sorry,",answer,'is not a valid Entry.');
 				newInput.bstOptions();
 			}
 		});
@@ -120,8 +125,8 @@ function UserInput(){
 	this.searchNode = function(){
 		getData.question('Please enter a number to search for. ', function(answer){
 			answer = Number(answer);
-			var directions = "the directions are root";
-			node.displayNodePath(answer, directions);
+			var directionBase = "the directions are root";
+			node.displayNodePath(answer, directionBase);
 		});
 	};
 }
